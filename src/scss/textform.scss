@@ -1,0 +1,27 @@
+@font-face {
+    font-family: "try"; 
+    src: url("../src/fonts/try-clother-bold.ttf");
+    font-weight: normal;
+	font-style: normal;
+}
+
+$heading1: 38px;
+$points: 18px;
+$footerList: 12px;
+$breadcrumbs: 12px;
+$item: 16px;
+$numPoint: 18px;
+$mainmenu:28px;
+
+body {font-family: "try";}
+h1 { font-size: $heading1;}
+.breadcrumbs { font-size: $breadcrumbs;}
+
+ul { list-style: none; margin: 0; padding: 0;}
+a {text-decoration: none;}
+button { font-size: inherit; font-family: inherit; color: inherit;}
+.header__menu {font-size: $mainmenu;}
+.points { font-size: $points;}
+.num-point {font-size: $numPoint;}
+.item__name {font-size: $item;}
+.footer__list { font-size: $footerList;}
