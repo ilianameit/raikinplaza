@@ -1,0 +1,310 @@
+$maingray: #252424;
+$redorange: #DF4826;
+$orange: #FF7431;
+$gray: #7E839C;
+$lightgray: #BEBBB9;
+$white: #fff;
+$mainBg: #F4F4F4;
+$grayBorder: #EFEFEF;
+
+*, *::after, *::before {
+ margin: 0px;
+ padding: 0px;
+ border: 0px;
+}
+html, body {height: 100%;}
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+   color: $maingray;
+   overflow: hidden;
+}
+a {
+    color: inherit;
+}
+button {background: none;}
+
+$secPadding: 20px;
+$secLRPadding: $secPadding + 10 ;
+$secTBPadding: $secPadding + 30 ;
+%sectionPadding {
+    padding-left: $secLRPadding;
+    padding-right: $secLRPadding;
+  }
+@mixin fillWhite {
+    fill: $white;
+}
+@mixin fillBlack {
+    fill: $maingray;
+}
+$maxScreen: 950px;
+@mixin mobHeaderWhite{
+background-color: $white; }
+
+@mixin habgurgerMob ($zIndex: 1) {
+    position: absolute;
+         height: 100%;
+         width: 100%;
+         z-index: $zIndex;
+}
+ .head {
+    background-color: $maingray;
+    color: $white;
+
+   &.white { 
+        @media screen and (max-width: $maxScreen){
+            @include mobHeaderWhite;
+            @include habgurgerMob;
+
+            svg {
+                @include fillBlack;
+            }
+            >section {
+                height: 100%;
+            }
+        }
+    }
+    
+.header {
+    padding: 7px $secPadding;
+ }
+
+.header__body { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.header__menu{
+
+    @media screen and (max-width: $maxScreen){
+        top: 100%;
+        
+        padding: 40px  $secTBPadding;
+        @include habgurgerMob(2);
+        width: auto;
+        @include mobHeaderWhite;
+        z-index: 1;
+        color: $maingray;
+    }
+    &.active{
+        display:block;
+        
+    }
+}
+
+.header__logo>* {
+    width: 80px; 
+    @include fillWhite;
+}
+
+
+
+> section {
+    @extend %sectionPadding;
+    padding-top: $secLRPadding;
+    padding-bottom: $secTBPadding;
+}
+.header__list {
+    display: flex;
+     column-gap: 10px;
+
+        @media screen and (max-width: $maxScreen){
+            & {
+                flex-direction: column;
+
+                li{
+                padding-bottom: 20px;
+                }
+            }
+        }
+
+    }
+    ul.breadcrumbs {
+         color: $lightgray;
+        li {
+            display: inline;
+        }
+
+        li:not(:last-of-type):after {
+            content: '\0020\002F';
+        }
+    }
+ }
+ .header__burger {display: none;}
+
+
+@mixin flexMiddle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+$indentObj: 5px;
+@mixin marginLeftSVG($indentSVG: $indentObj) {
+    margin-left: $indentObj;
+}
+.points {
+    background-color: $redorange;
+    position:absolute;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    @include flexMiddle;
+    flex-direction: row;
+    padding: $secPadding 50px;
+
+
+    svg {
+        @include fillWhite;
+        @include marginLeftSVG;
+    }
+}
+
+@mixin dashedBorder($borderWidth: 3px, $borderColor: $grayBorder, $dash: 8px) {
+    height: $borderWidth;
+    width: 100%;
+ 
+        //border-color: $borderColor;
+        background-image: linear-gradient(to left , $borderColor 50%, transparent 50%);
+        background-size: $dash;
+    background-repeat: repeat-x;
+    
+
+}
+
+.list__items {
+    overflow: auto;
+
+    background-color: $mainBg;
+    @extend %sectionPadding;
+    padding-bottom: $secLRPadding;
+    padding-top: $secTBPadding;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+    grid-gap: 20px;
+
+    .item {
+        background: $white;
+        text-align: center;
+        display: grid;
+        grid-gap: 20px;
+ 
+
+
+        img {
+            width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+            object-position: center top;
+        }
+
+        .item__name {
+            margin: 3px 0 23px;
+        }
+        
+        .num-point {
+            color: $orange;
+            @include flexMiddle;
+            padding: 20px 0;
+            position: relative;
+           
+            svg {
+                fill: $orange;
+                @include marginLeftSVG;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                @include dashedBorder;
+            }
+        }
+
+
+    }
+
+}
+$footerListPadding: 12px;     
+footer {
+    background: $white;
+    padding: 0 $footerListPadding 14px;
+    box-shadow: 0px -1px 20px rgba(37, 36, 36, 0.12);
+}
+$footerLiPadding: 18px;
+ @mixin activeLi($borderWidth: 2px) {
+        border-top-width: $borderWidth;
+        border-style: solid;
+        border-radius: 1px;
+        padding-top: $footerLiPadding - $borderWidth;
+}
+
+$widthSvg: 21px;
+.footer__list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: $footerListPadding;
+    text-align: center;
+    position: relative;
+
+    >li {
+    padding-top: $footerLiPadding;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+        >a, >button {
+            display: grid;
+            align-content: end;
+            justify-items: center;
+            row-gap: $indentObj;
+
+                       
+        }
+
+        svg {
+            width: $widthSvg;}
+   
+
+    
+     &.active:not(:nth-of-type(3)) {
+        svg:not(.home){
+            stroke: $maingray;
+        }  
+        .home {
+            fill: $maingray;
+        }
+     }
+  
+    &:not(.active,  :nth-of-type(3)) {
+        color: $gray;  
+        svg:not(.home) {
+            stroke: $gray;
+        }
+        .home {
+            fill: $gray;
+        }
+    }
+   
+    &.active:not( :nth-of-type(3)) {
+        @include activeLi();
+            border-color: $orange;
+            
+    }
+    &:active .qr-code{
+        background-color: $redorange;
+    }
+ }
+    .qr-code {
+        border-radius: 50%;
+        background-color:  $orange;
+        position: absolute;
+        top: -12px;
+        @include flexMiddle;
+        width: $widthSvg * 2 +8;
+        height: $widthSvg * 2 +8;
+    }
+    
+}
+

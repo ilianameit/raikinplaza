@@ -1,0 +1,17 @@
+$medium: 950px;
+
+@media screen and (max-width: $medium) {
+    body {position: relative;}
+    .header__burger {display: block;}
+    .header__menu {display: none;}
+
+    .points {
+        width: 70%;
+    }
+}
+
+@media screen and (orientation: landscape) {
+ body {overflow-y: auto; }
+ br {display: none;}
+ .list__items {overflow: initial;}
+}
